@@ -1,0 +1,6 @@
+import React from 'react'
+
+export default async function Page() {
+    const Content = (await import('@/app/content/index.mdx')).default
+    return <Content />
+} 
