@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      .player {
+        padding: 20px;
+        background-color: lightgray;
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+      }
+      .player.selected {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player1" class="player">Player 1</div>
+    <div id="player2" class="player">Player 2</div>
+    <br><br>
+    <button id="playRound">Next Round</button>
+    <br><br>
+    <div id="result"></div>
+    <script>
+      const options = ["rock", "paper", "scissors"];
+
+      function getRandomThrow() {
+        return options[Math.floor(Math.random() * 3)];
+      }
+
+      function determineWinner(player1Throw, player2Throw) {
+        if (player1Throw === player2Throw) {
+          return "tie";
+        }
+        if (player1Throw === "rock" && player2Throw === "scissors") {
+          return "player1";
+        }
+        if (player1Throw === "paper" && player2Throw === "rock") {
+          return "player1";
+        }
+        if (player1Throw === "scissors" && player2Throw === "paper") {
+          return "player1";
+        }
+        return "player2";
+      }
+
+      let currentPlayer = 1;
+      let player1Score = 0;
+      let player2Score = 0;
+
+      $("#playRound").click(function() {
+        $(".player").removeClass("selected");
+        $("#player" + currentPlayer).addClass("selected");
+
+        let player1Throw = getRandomThrow();
+        let player2Throw = getRandomThrow();
+        let winner = determineWinner(player1Throw, player2Throw);
+
+        $("#result").text(
+          "Player 1 chose " +
+            player1Throw +
+            ", Player 2 chose " +
+            player2Throw +
+            ". " +
+            winner +
+            " wins!"
+        );
+
+        if (winner === "player1") {
+          player1Score++;
+        } else if (winner === "player2") {
+          player2Score++;
+        }
+
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+      });
+    </script>
+  </body>
+</html>

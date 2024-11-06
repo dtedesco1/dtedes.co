@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3D Landscape with Trees</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Set up the scene, camera, and renderer
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 25;
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      function addTrees() {
+        // Create 10 trees
+        for (var i = 0; i < 40; i++) {
+          // Create a tree trunk
+          var trunkGeometry = new THREE.BoxGeometry(0.5, 1, 0.5);
+          var trunkMaterial = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
+          var trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+
+          // Create a tree top
+          var topGeometry = new THREE.ConeGeometry(1, 2, 6);
+          var topMaterial = new THREE.MeshBasicMaterial({ color: 0x008000 });
+          var treetop = new THREE.Mesh(topGeometry, topMaterial);
+
+          // Randomly position the tree
+          var x = Math.random(1, 50) * 20 - 10;
+          var z = Math.random(1, 500) * 20 - 10;
+          var y = Math.random(1, 500) * 2 + 1;
+          trunk.position.set(x, y/2, z);
+          treetop.position.set(x, y, z);
+
+          // Add the tree to the scene
+          scene.add(trunk);
+          scene.add(treetop);
+        }
+      }
+      
+      addTrees();
+      
+      // Render the scene
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    
+      // Allow the user to move into the trees when the mouse moves by moving the camera along the z-axis
+        document.addEventListener("mousemove", function(event) {
+            camera.position.z = 25 - event.clientY / 100;
+        });
+
+    </script>
+  </body>
+</html>

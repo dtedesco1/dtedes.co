@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Space Snow</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
+    <script>
+      // Set up the scene
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create the pattern
+      var geometry = new THREE.Geometry();
+      for (var i = 0; i < 10000; i++) {
+        var vertex = new THREE.Vector3();
+        vertex.x = Math.random() * 2000 - 1000;
+        vertex.y = Math.random() * 2000 - 1000;
+        vertex.z = Math.random() * 2000 - 1000;
+        geometry.vertices.push(vertex);
+      }
+      var material = new THREE.PointsMaterial({ color: 0xffffff, size: 4 });
+      var pattern = new THREE.Points(geometry, material);
+      scene.add(pattern);
+
+      camera.position.z = 500;
+
+      // Animate the pattern
+      function animate() {
+        requestAnimationFrame(animate);
+        pattern.rotation.x += 0.001;
+        pattern.rotation.y += 0.001;
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>

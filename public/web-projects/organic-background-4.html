@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gravity circles</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <style>
+    body {
+      background-color: rgb(214, 216, 196);
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    let fixedCircle;
+    let circles = [];
+    let numCircles = 100;
+    let G = .001;
+
+    function setup() {
+    createCanvas(windowWidth, windowHeight);
+    frameRate(60);
+    fixedCircle = {
+        x: width/2,
+        y: height/2,
+        size: 100,
+    }
+    for (let i = 0; i < numCircles; i++) {
+        circles.push({
+        x: random(width),
+        y: random(height),
+        size: random(25, 50),
+        vx: random(-.01, .01),
+        vy: random(-.01, .01)
+        });
+    }
+    }
+
+    function draw() {
+        // background(0);
+        fill("rgb(214, 216, 196)")
+        ellipse(fixedCircle.x, fixedCircle.y, fixedCircle.size)
+        for (let i = 0; i < numCircles; i++) {
+            let c1 = circles[i];
+            ellipse(c1.x, c1.y, c1.size);
+            for (let j = 0; j < numCircles; j++) {
+            if (i != j) {
+                let c2 = circles[j];
+                let distance = dist(c1.x, c1.y, c2.x, c2.y);
+                let force = G * c1.size * c2.size / (distance * distance);
+                let angle = atan2(c2.y - c1.y, c2.x - c1.x);
+                c1.vx += force * cos(angle);
+                c1.vy += force * sin(angle);
+            }
+            }
+            c1.x += c1.vx;
+            c1.y += c1.vy;
+        }
+    }
+
+  </script>
+</body>
+
+</html>

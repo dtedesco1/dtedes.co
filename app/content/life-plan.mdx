@@ -1,0 +1,37 @@
+# Life Plan Summary 2024-02
+
+My life plan is a living document that I use to guide my life. It is centered on my personal vision, a single-sentence summary of who I aim to be.
+
+## Vision
+
+A child of God who loves all, makes a living bringing joy to the world with technology, and explores the universe through art and learning.
+
+### Components
+
+- **child of God**: Not merely a "believer" with such a label, but someone who has a deep and personal relationship with God and seeks to live a life of love and service to others.
+- **loves all**: Love is the first verb in the vision. It's not a state, as relationships require proactive effort over time. Love does not mean giving everyone what they want, but it does mean giving respect, honesty, and mercy even when its difficult.
+- **makes a living**: Work funds pursuit of the vision to its fullest. Volunteering time and resources can show love, but they are not the entirety of the vision.
+- **bringing joy to the world with technology**: Technology is a powerful tool that can bring joy to the world. It is not an end in itself.
+- **explores the universe through art and learning**: I find the universe endlessly beautiful. I seek to traverse it through art and learning. It is not a place to be conquered.
+
+## Missions
+
+Missions are the specific goals that I have set for myself. They are the building blocks to my vision.
+
+### Foundation
+
+- **Faith**: Build a strong relationship with God
+- **Marriage**: Cherish and enjoy life with Flora
+- **Friends**: Cultivate friendships, staying open to new and old, straightforward and challenging
+- **Health**: Invigorate yourself with the fitness regimen of an athlete, a diet and sleep schedule that make you feel great, and excellent organization and cleanliness
+
+### Work
+
+- **Economics**: Make enough money to fund your vision, seeking paid work that aligns with your goals
+- **Ties**: Deepen your professional network in technology and widen it to more fields
+- **Experiments**: Make small bets of time and money, exposing yourself to new and forward-looking arenas that could graduate to "economics" goals
+
+### Wonder
+
+- **Expression**: Make music and write daily, even if it's just a few minutes and just for yourself
+- **Learning**: Spend significant time exploring disciplines and places that excite you and when no practical application exists

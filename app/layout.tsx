@@ -1,4 +1,5 @@
 import './globals.css'
+import Footer from '@/components/footer'
 
 export default function RootLayout({
     children,
@@ -11,6 +12,7 @@ export default function RootLayout({
                 <article className="prose prose-lg dark:prose-invert max-w-4xl mx-auto p-8">
                     {children}
                 </article>
+                <Footer />
             </body>
         </html>
     )

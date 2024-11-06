@@ -1,0 +1,78 @@
+<!-- Weird moving blob -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weird moving blob</title>
+        <style>
+        </style>
+    </head>
+    <body>
+        <script>
+            // Create an SVG element
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "500");
+            svg.setAttribute("height", "500");
+            document.body.appendChild(svg);
+
+            // Define some colors for the blobs
+            var colors = ["red", "green", "blue", "yellow", "pink"];
+
+            // Create 6 equally spaced points around the circumference of a circle
+            var points = [];
+            var radius = 100;
+            var angle = 0;
+            var cx = 250; // center x
+            var cy = 250; // center y
+            for (var i = 0; i < 6; i++) {
+            var x = cx + radius * Math.cos(angle);
+            var y = cy + radius * Math.sin(angle);
+            points.push({x: x, y: y});
+            angle += Math.PI / 3;
+            }
+
+            // Create a path element for the blob
+            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("fill", colors[Math.floor(Math.random() * colors.length)]);
+            svg.appendChild(path);
+
+            // Draw a smooth curve through each point using spline()
+            function drawBlob() {
+            var d = "";
+            for (var i = 0; i < points.length; i++) {
+                var p1 = points[i];
+                var p2 = points[(i + 1) % points.length];
+                var p3 = points[(i + 2) % points.length];
+                var cp1x = p1.x + (p2.x - p1.x) / 6;
+                var cp1y = p1.y + (p2.y - p1.y) / 6;
+                var cp2x = p2.x - (p3.x - p2.x) / 6;
+                var cp2y = p2.y - (p3.y - p2.y) / 6;
+                if (i == 0) {
+                d += "M" + cp1x + "," + cp1y;
+                }
+                d += "C" + cp1x + "," + cp1y + "," + cp2x + "," + cp2y + "," + p2.x + "," +
+                p2.y;
+                
+            }
+            path.setAttribute("d", d);
+            }
+
+            // Over time, change the { x, y } values of each point randomly
+            function animateBlob() {
+            
+            for (var i=0;i<points.length;i++){
+            
+            points[i].x += Math.random()*10-5;
+            points[i].y += Math.random()*10-5;
+
+            }
+            drawBlob();
+            requestAnimationFrame(animateBlob);
+            }
+
+            drawBlob();
+            animateBlob();
+        </script>
+
+    </body>
+</html>

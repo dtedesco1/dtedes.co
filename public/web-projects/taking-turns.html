@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Three Players Taking Turns</title>
+    <style>
+      #game {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 10px;
+        padding: 10px;
+      }
+      #player1, #player2, #player3 {
+        margin: 10px;
+        padding: 10px;
+        background-color: #dddddd;
+        border-radius: 5px;
+        width: 30%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game">
+      <div id="player1">Player 1</div>
+      <div id="player2">Player 2</div>
+      <div id="player3">Player 3</div>
+    </div>
+    <script>
+      let currentPlayer = 1;
+      function switchPlayer() {
+        currentPlayer = currentPlayer % 3 + 1;
+        document.querySelector("#player" + currentPlayer).style.backgroundColor = "#ffffff";
+        document.querySelector("#player" + (currentPlayer % 3 + 1)).style.backgroundColor = "#dddddd";
+        document.querySelector("#player" + ((currentPlayer + 1) % 3 + 1)).style.backgroundColor = "#dddddd";
+      }
+      document.querySelector("#player1").addEventListener("click", switchPlayer);
+      document.querySelector("#player2").addEventListener("click", switchPlayer);
+      document.querySelector("#player3").addEventListener("click", switchPlayer);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Markdown to HTML Converter</title>
+	<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+</head>
+<body>
+	<h1>Markdown to HTML Converter</h1>
+	<p>Paste your Markdown in the box below:</p>
+	<textarea id="markdown" rows="10" cols="80"></textarea>
+	<button onclick="convertMarkdown()">Convert</button>
+	<div id="html"></div>
+	<script>
+		function convertMarkdown() {
+			var converter = new showdown.Converter();
+			var markdown = document.getElementById('markdown').value;
+			var html = converter.makeHtml(markdown);
+			document.getElementById('html').innerHTML = html;
+		}
+	</script>
+</body>
+</html>

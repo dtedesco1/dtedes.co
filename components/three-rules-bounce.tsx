@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-export function ThreeRulesBounce() {
+export default function ThreeRulesBounce() {
     const preRef = useRef<HTMLPreElement>(null)
 
     useEffect(() => {
@@ -83,19 +83,6 @@ export function ThreeRulesBounce() {
                 ref={preRef}
                 className="text-base-content bg-base-300"
             />
-        </div>
-    )
-}
-
-export default function ToggleBounce() {
-    const [show, setShow] = useState(false)
-
-    return (
-        <div>
-            <button className="btn" onClick={() => setShow(!show)}>
-                {show ? 'Hide' : 'Show'} Bouncing Numbers
-            </button>
-            {show && <ThreeRulesBounce />}
         </div>
     )
 }

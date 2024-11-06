@@ -1,0 +1,132 @@
+<html>
+  <head>
+    <title>Organic Pattern Background</title>
+    <style>
+      body {
+        background-color: #2b2b4c;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="background"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script>
+      var canvas = document.getElementById("background");
+      var ctx = canvas.getContext("2d");
+      var cw = (canvas.width = window.innerWidth);
+      var ch = (canvas.height = window.innerHeight);
+      var points = [],
+        tick = 0,
+        opts = {
+          count: 5,
+          range: {
+            x: 20,
+            y: 80
+          },
+          duration: {
+            min: 20,
+            max: 40
+          },
+          thickness: 10,
+          strokeColor: "#4c2b2b",
+          level: 0.2,
+          curved: true
+        };
+
+      function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function getDistance(p1, p2) {
+        return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+      }
+
+      function getMiddlePoint(p1, p2) {
+        return {
+          x: p1.x + (p2.x - p1.x) / 2,
+          y: p1.y + (p2.y - p1.y) / 2
+        };
+      }
+
+      function getAngle(p1, p2) {
+        return Math.atan2(p2.y - p1.y, p2.x - p1.x);
+      }
+
+      function getPointOnCircle(pos, radius, angle) {
+        return {
+          x: pos.x + Math.cos(angle) * radius,
+          y: pos.y + Math.sin(angle) * radius
+        };
+      }
+
+      function createPoints() {
+        points = [];
+        for (var x = 0; x < opts.count; x++) {
+          for (var y = 0; y < opts.count; y++) {
+            var px =
+              (x + 0.5) * (cw / opts.count) +
+              getRandom(-opts.range.x, opts.range.x);
+            var py =
+              (y + 0.5) * (ch / opts.count) +
+              getRandom(-opts.range.y, opts.range.y);
+            var p = {
+              x: px,
+              originX: px,
+              y: py,
+              originY: py
+            };
+            points.push(p);
+          }
+        }
+      }
+
+      function renderShape() {
+        ctx.clearRect(0, 0, cw, ch);
+        for (var i = 0; i < points.length; i++) {
+          var p = points[i];
+          p.x = p.originX + Math.sin((tick + i) / opts.duration.min) * opts.range.x;
+          p.y = p.originY + Math.sin((tick + i) / opts.duration.max) * opts.range.y;
+          drawCircle(p);
+          drawLine(p);
+        }
+      }
+
+      function drawCircle(p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, opts.thickness, 0, 2 * Math.PI);
+        ctx.fillStyle = opts.strokeColor;
+        ctx.fill();
+      }
+
+      function drawLine(p) {
+        if (points.indexOf(p) === points.length - 1) return;
+        var next = points[points.indexOf(p) + 1];
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(next.x, next.y);
+        ctx.strokeStyle = opts.strokeColor;
+        ctx.stroke();
+      }
+
+      function animate() {
+        tick += 0.1;
+        renderShape();
+        requestAnimationFrame(animate);
+      }
+
+      createPoints();
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>

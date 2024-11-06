@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Spherical Cows (kind of...)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <style>
+    body {
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    let canvas;
+    let cowX = [100,200,300];
+    let cowY = [100,200,300];
+    let cowSize = [50,75,100];
+    let cowVX = [1, -1, 0.5];
+    let cowVY = [1, -1, 0.5];
+    function setup() {
+    canvas = createCanvas(windowWidth, windowHeight);
+    frameRate(60);
+    //draw stars
+    for (let i = 0; i < 300; i++) {
+        let x = random(0, width);
+        let y = random(0, height);
+        stroke(255);
+        point(x, y);
+    }
+    //draw cows
+    for(let i = 0; i < 3; i++){
+        fill("white");
+        ellipse(cowX[i],cowY[i],cowSize[i],cowSize[i]);
+        let numSpots = random(5,8);
+        for(let j = 0; j < numSpots; j++){
+        let spotX = random(cowX[i]-cowSize[i]/2,cowX[i]+cowSize[i]/2);
+        let spotY = random(cowY[i]-cowSize[i]/2,cowY[i]+cowSize[i]/2);
+        let spotSize = random(cowSize[i]*.3,cowSize[i]*.6);
+        while(dist(spotX,spotY,cowX[i],cowY[i]) > cowSize[i]/3.5){
+            spotX = random(cowX[i]-cowSize[i]/2,cowX[i]+cowSize[i]/2);
+            spotY = random(cowY[i]-cowSize[i]/2,cowY[i]+cowSize[i]/2);
+            }
+            fill("black");
+            noStroke();
+            beginShape();
+            for (let i = 0; i < random(5,10); i++){
+                let angle = map(i,0,random(5,10),0,TWO_PI);
+                let x = spotX + cos(angle)*spotSize/2;
+                let y = spotY + sin(angle)*spotSize/2;
+                vertex(x, y);
+            }
+            endShape(CLOSE);
+            }
+            fill("white");
+            ellipse(cowX[i]+cowSize[i]/4,cowY[i]-cowSize[i]/4,cowSize[i]/8,cowSize[i]/8);
+            fill("black");
+            ellipse(cowX[i]+cowSize[i]/4,cowY[i]-cowSize[i]/4,cowSize[i]/16,cowSize[i]/16);
+        }
+        }
+
+        function draw(){
+        simulateGravity();
+        }
+
+        function simulateGravity(){
+        //Gravity constant
+        let G = 1;
+        
+        //Update velocity and position of each cow based on the laws of gravity
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+            if(i != j){
+                let dx = cowX[j] - cowX[i];
+                let dy = cowY[j] - cowY[i];
+                let distance = sqrt(dx*dx + dy*dy);
+                let force = G*cowSize[i]*cowSize[j]/(distance*distance);
+                let angle = atan2(dy, dx);
+                cowVX[i] += force*cos(angle);
+                cowVY[i] += force*sin(angle);
+            }
+            }
+            cowX[i] += cowVX[i];
+            cowY[i] += cowVY[i];
+        }
+        }
+  </script>
+</body>
+
+</html>
+

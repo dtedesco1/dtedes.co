@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Goal table</title>
+    <style>
+      /* Styles for the table */
+      table {
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Goal Organizer</h1>
+    <form>
+      <label for="new-time-period">Add new time period:</label>
+      <input id="new-time-period" type="text">
+      <button type="button" onclick="addTimePeriod()">Add</button>
+    </form>
+    <form>
+      <label for="new-category">Add new category:</label>
+      <input id="new-category" type="text">
+      <button type="button" onclick="addCategory()">Add</button>
+    </form>
+    <form>
+      <label for="new-goal-text">Add new goal:</label>
+      <input id="new-goal-text" type="text">
+      <select id="new-goal-time-period"></select>
+      <select id="new-goal-category"></select>
+      <button type="button" onclick="addGoal()">Add</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Time Period</th>
+          <th>Goal</th>
+          <th>Completion Score</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="goals-table"></tbody>
+  </table>
+  <script>
+    // Initialize the multitree object
+    let multitree = {
+      timePeriods: {},
+      categories: {},
+      addTimePeriod: function(timePeriod) {
+          this.timePeriods[timePeriod] = new TimePeriodNode(timePeriod);
+      },
+      addCategory: function(category) {
+          this.categories[category] = new CategoryNode(category);
+      },
+      addGoal: function(goalText, completionScore, timePeriod, category) {
+          let goalNode = new GoalNode(goalText, completionScore);
+          goalNode.parentTimePeriod = timePeriod;
+          goalNode.parentCategory = category;
+          this.categories[category].childGoals.push(goalNode);
+          this.timePeriods[timePeriod].childGoals.push(goalNode);
+      }
+    };
+
+    function TimePeriodNode(name) {
+      this.name = name;
+      this.childGoals = [];
+      }
+
+    function CategoryNode(name) {
+      this.name = name;
+      this.childGoals = [];
+    }
+
+    function GoalNode(goalText, completionScore) {
+      this.goalText = goalText;
+      this.completionScore = completionScore;
+    }
+
+    // Populate the time period and category options
+    for (let timePeriod in multitree.timePeriods) {
+      let option = document.createElement("option");
+      option.value = timePeriod;
+      option.innerText = timePeriod;
+      document.getElementById("new-goal-time-period").appendChild(option);
+    }
+
+    for (let category in multitree.categories) {
+      let option = document.createElement("option");
+      option.value = category;
+      option.innerText = category;
+      document.getElementById("new-goal-category").appendChild(option);
+    }
+
+    // Add time period
+    function addTimePeriod() {
+      let newTimePeriod = document.getElementById("new-time-period").value;
+      multitree.addTimePeriod(newTimePeriod);
+      let option = document.createElement("option");
+      option.value = newTimePeriod;
+      option.innerText = newTimePeriod;
+      document.getElementById("new-goal-time-period").appendChild(option);
+      document.getElementById("new-time-period").value = "";
+    }
+
+    // Add category
+    function addCategory() {
+      let newCategory = document.getElementById("new-category").value;
+      multitree.addCategory(newCategory);
+      let option = document.createElement("option");
+      option.value = newCategory;
+      option.innerText = newCategory;
+      document.getElementById("new-goal-category").appendChild(option);
+      document.getElementById("new-category").value = "";
+    }
+
+    // Add goal
+    function addGoal() {
+      let goalText = document.getElementById("new-goal-text").value;
+      let timePeriod = document.getElementById("new-goal-time-period").value;
+      let category = document.getElementById("new-goal-category").value;
+      multitree.addGoal(goalText, 5, timePeriod, category);
+      updateTable();
+      document.getElementById("new-goal-text").value = "";
+      document.getElementById("new-goal-time-period").value = "";
+      document.getElementById("new-goal-category").value = "";
+    }
+
+    // Update table
+    function updateTable() {
+      // Clear the table
+      let tbody = document.getElementById("goals-table");
+      tbody.innerHTML = "";
+      // Iterate through the categories and time periods to add the goals to the table
+      for (let category in multitree.categories) {
+        for (let goal of multitree.categories[category].childGoals) {
+          let tr = document.createElement("tr");
+          let td1 = document.createElement("td");
+          td1.innerText = goal.parentCategory;
+          tr.appendChild(td1);
+          let td2 = document.createElement("td");
+          td2.innerText = goal.parentTimePeriod;
+          tr.appendChild(td2);
+          let td3 = document.createElement("td");
+          td3.innerText = goal.goalText;
+          tr.appendChild(td3);
+          let td4 = document.createElement("td");
+          td4.innerText = goal.completionScore;
+          tr.appendChild(td4);
+          let td5 = document.createElement("td");
+          let editBtn = document.createElement("button");
+          editBtn.innerText = "Edit";
+          editBtn.onclick = function() {
+            editGoal(goal);
+          };
+          td5.appendChild(editBtn);
+          tr.appendChild(td5);
+          tbody.appendChild(tr);
+        }
+      }
+    }
+      
+    //Edit goal
+    function editGoal(goal) {
+      let goalText = prompt("Edit goal text:", goal.goalText);
+      if (goalText) {
+          goal.goalText = goalText;
+        }
+        let completionScore = prompt("Edit completion score:", goal.completionScore);
+        if (completionScore) {
+          goal.completionScore = completionScore;
+        }
+        updateTable();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+	<title>Organic Shapes - p5.js Animation</title>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		let shapes = [];
+
+		function setup() {
+			createCanvas(window.innerWidth, window.innerHeight);
+			for (let i = 0; i < 10; i++) {
+				shapes.push(new Shape(random(width), random(height)));
+			}
+		}
+
+		function draw() {
+			background(0);
+			for (let i = 0; i < shapes.length; i++) {
+				shapes[i].update();
+				shapes[i].show();
+			}
+		}
+
+		function Shape(x, y) {
+			this.pos = createVector(x, y);
+			this.vel = createVector(0, 0);
+			this.acc = createVector(0, 0);
+			this.r = random(5, 15);
+			this.maxSpeed = 5;
+
+			this.update = function() {
+				let mouse = createVector(mouseX, mouseY);
+				this.acc = p5.Vector.sub(mouse, this.pos);
+				this.acc.setMag(0.2);
+
+				this.vel.add(this.acc);
+				this.vel.limit(this.maxSpeed);
+
+				this.pos.add(this.vel);
+			}
+
+			this.show = function() {
+				fill(255);
+				noStroke();
+				ellipse(this.pos.x, this.pos.y, this.r * 2);
+			}
+		}
+	</script>
+</body>
+
+</html>
