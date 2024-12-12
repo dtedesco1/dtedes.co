@@ -1,3 +1,4 @@
 node_modules
 .next
 .mdx-cache
+.DS_Store
