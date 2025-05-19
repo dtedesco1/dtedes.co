@@ -1,6 +1,6 @@
-# Next.js 15 Markdown Boilerplate
+# Daniel Tedesco's Personal Website
 
-A minimal Next.js 15 application that renders content from Markdown files.
+This is the personal website of Daniel Tedesco, an American technologist currently working as Data Lead at Google APAC. The website showcases his projects, writings, and other personal content.
 
 ## Features
 
