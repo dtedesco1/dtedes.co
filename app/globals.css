@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-pattern {
+  @apply bg-base-100 text-base-content relative min-h-screen;
+}
+
+.bg-pattern::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, #d4af37 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #0d662d 0%, transparent 40%);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  @apply transition-colors duration-200 hover:text-secondary;
+}
