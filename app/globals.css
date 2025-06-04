@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-pattern {
+  @apply bg-base-100 text-base-content relative min-h-screen;
+}
+
+.bg-pattern::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 30%, var(--s) 0%, transparent 50%),
+    radial-gradient(circle at 75% 70%, var(--p) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--p) 60%, var(--s)) 0%, transparent 60%);
+  background-size: 400px 400px;
+  background-position: 0 0, 0 0, 0 0;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+  animation: bg-shift 60s ease-in-out infinite alternate;
+}
+
+@keyframes bg-shift {
+  to {
+    background-position: 100px 80px, -120px -60px, 60px -100px;
+  }
+}
+
+a {
+  @apply transition-colors duration-200 hover:text-secondary;
+}
