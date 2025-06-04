@@ -11,7 +11,7 @@ export default function Footer() {
 
     return (
         <footer className="max-w-4xl mx-auto p-8 mt-8 border-t">
-            <Link href="/" className="prose prose-lg dark:prose-invert hover:opacity-80">
+            <Link href="/" className="prose prose-lg dark:prose-invert transition-opacity hover:opacity-80">
                 Back
             </Link>
         </footer>
