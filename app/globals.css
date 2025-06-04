@@ -16,9 +16,9 @@
     radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--p) 60%, var(--s)) 0%, transparent 60%);
   background-size: 400px 400px;
   background-position: 0 0, 0 0, 0 0;
-  opacity: 0.06;
+  opacity: 0.1;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   animation: bg-shift 60s ease-in-out infinite alternate;
 }
 
