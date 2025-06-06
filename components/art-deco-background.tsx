@@ -2,7 +2,7 @@ export default function ArtDecoBackground() {
     return (
         <svg
             aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vmax] h-[200vmax] pointer-events-none text-primary-200/10 dark:text-secondary-500/10 animate-spin-slower [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vmax] h-[150vmax] pointer-events-none text-primary-200/10 dark:text-secondary-500/10 animate-spin-slower [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
         >
             <defs>
                 <pattern id="artdeco" width="80" height="80" patternUnits="userSpaceOnUse">
