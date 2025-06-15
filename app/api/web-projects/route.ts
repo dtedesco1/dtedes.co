@@ -2,8 +2,14 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
+let cachedProjects: { title: string; path: string; filename: string }[] | null = null
+
 export async function GET() {
     const webProjectsDir = path.join(process.cwd(), 'public', 'web-projects')
+
+    if (cachedProjects) {
+        return NextResponse.json(cachedProjects)
+    }
 
     // Check if directory exists
     if (!fs.existsSync(webProjectsDir)) {
@@ -31,6 +37,7 @@ export async function GET() {
             filename
         }))
 
+        cachedProjects = projects
         return NextResponse.json(projects)
     } catch (error) {
         console.error('Error reading web projects:', error)

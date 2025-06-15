@@ -58,6 +58,7 @@ export default function WebProjectsGallery() {
                                 src={project.path}
                                 className="absolute inset-0 w-full h-full border-t border-base-300"
                                 frameBorder="0"
+                                loading="lazy"
                                 title={project.title}
                             />
                         </div>

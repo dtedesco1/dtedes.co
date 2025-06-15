@@ -78,11 +78,18 @@ export default function ConwayGame() {
             grid = update(grid)
         }
 
-        // Animation loop
-        const interval = setInterval(draw, 500)
+        // Animation loop using requestAnimationFrame for smoother updates
+        let animationId: number
+
+        const loop = () => {
+            draw()
+            animationId = requestAnimationFrame(loop)
+        }
+
+        animationId = requestAnimationFrame(loop)
 
         return () => {
-            clearInterval(interval)
+            cancelAnimationFrame(animationId)
             window.removeEventListener('resize', updateCanvasSize)
         }
     }, [])
