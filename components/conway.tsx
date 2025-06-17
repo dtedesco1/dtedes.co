@@ -35,9 +35,9 @@ export default function ConwayGame() {
             for (let i = -1; i <= 1; i++) {
                 for (let j = -1; j <= 1; j++) {
                     if (i === 0 && j === 0) continue
-                    if (x + i >= 0 && x + i < height && y + j >= 0 && y + j < width) {
-                        count += grid[x + i][y + j]
-                    }
+                    const row = (x + i + height) % height
+                    const col = (y + j + width) % width
+                    count += grid[row][col]
                 }
             }
             return count
@@ -80,9 +80,14 @@ export default function ConwayGame() {
 
         // Animation loop using requestAnimationFrame for smoother updates
         let animationId: number
+        const stepDelay = 800 // ms between grid updates for a slower pace
+        let lastTime = 0
 
-        const loop = () => {
-            draw()
+        const loop = (time: number) => {
+            if (time - lastTime > stepDelay) {
+                draw()
+                lastTime = time
+            }
             animationId = requestAnimationFrame(loop)
         }
 

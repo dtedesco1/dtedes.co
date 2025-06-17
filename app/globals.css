@@ -19,12 +19,18 @@
   opacity: 0.05;
   pointer-events: none;
   z-index: 0;
-  animation: bg-shift 120s ease-in-out infinite alternate;
+  animation: bg-wave 180s ease-in-out infinite;
 }
 
-@keyframes bg-shift {
-  to {
-    background-position: 100px 80px, -120px -60px, 60px -100px;
+@keyframes bg-wave {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  50% {
+    background-position: 60px 40px, -60px -40px, 40px -60px;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0 0;
   }
 }
 
