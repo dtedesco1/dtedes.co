@@ -1,0 +1,27 @@
+{
+  "description": "Project settings for dtedes.co - Next.js MDX personal website",
+  "environmentVariables": {
+    "NEXT_TELEMETRY_DISABLED": "1"
+  },
+  "tools": {
+    "permissions": {
+      "Bash": {
+        "allowed": true,
+        "commands": {
+          "npm": true,
+          "next": true,
+          "node": true,
+          "git": true
+        }
+      },
+      "Edit": {
+        "allowed": true,
+        "paths": ["app/**", "components/**", "*.md", "*.mdx", "*.json", "*.js", "*.ts", "*.tsx"]
+      },
+      "Write": {
+        "allowed": true,
+        "paths": ["app/content/**", "components/**", "*.md", "*.mdx"]
+      }
+    }
+  }
+}

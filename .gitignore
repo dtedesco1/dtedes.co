@@ -2,3 +2,9 @@ node_modules
 .next
 .mdx-cache
 .DS_Store
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# MCP project configuration (commit this for team collaboration)
+# .mcp.json
