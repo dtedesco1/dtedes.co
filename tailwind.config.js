@@ -3,9 +3,16 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      keyframes: {
+        wave: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-80px)' },
+        },
+      },
       animation: {
         'spin-slow': 'spin 50s linear infinite',
         'spin-slower': 'spin 120s linear infinite',
+        'wave-slower': 'wave 60s linear infinite',
       },
     },
   },
