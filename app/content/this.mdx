@@ -1,0 +1,107 @@
+# How I Made This Website
+
+## The Philosophy
+
+I'm lazy, so I made this extremely simple.
+
+I wanted three things:
+1. **Easy content editing** - Just write Markdown files, no build steps to think about
+2. **React when needed** - Drop in custom components for interactive features
+3. **Straightforward deployment** - Modern hosting with static generation
+
+Much simpler markdown rendering solutions exist, but this setup bridges markdown simplicity with React flexibility and Next.js deployment convenience.
+
+## The Stack
+
+This site uses:
+
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
+- **[MDX](https://mdxjs.com/)** - Markdown + JSX for content files
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first styling
+- **[DaisyUI](https://daisyui.com/)** - Component library for consistent design
+- **[Framer Motion](https://www.framer.com/motion/)** - Animation library
+- **TypeScript** - Type safety
+
+## How It Works
+
+### File-Based Routing
+
+The magic is simple: **the folder structure becomes the URL path**.
+
+```
+app/content/index.mdx → /
+app/content/about.mdx → /about
+app/content/going-deep/ai.mdx → /going-deep/ai
+```
+
+A single dynamic route handler (`app/[...slug]/page.tsx`) imports the corresponding MDX file and renders it. That's it.
+
+### Content Creation
+
+To add a new page, I just create a `.mdx` file:
+
+```mdx
+# My New Page
+
+This is content. **Markdown works**.
+
+I can also use React components when needed.
+```
+
+### React Components
+
+When I need interactivity, I create components in `components/` and import them:
+
+```mdx
+import ScrambleHover from '@/components/ScrambleHover'
+
+<ScrambleHover text="Daniel Tedesco" />
+```
+
+This site has custom components for things like:
+- Animated text effects (ScrambleHover)
+- Conway's Game of Life visualization
+- Web projects gallery
+- Art Deco background effects
+
+## The Template
+
+I created a minimal boilerplate that handles the core functionality, so I could reuse it for future projects:
+
+**[nextjs-markdown-boilerplate](https://github.com/dtedesco1/nextjs-markdown-boilerplate)**
+
+It's intentionally minimal - just the essentials for markdown-to-page conversion with optional React integration. No bloat.
+
+## This Site
+
+The full source code for this website is open source:
+
+**[dtedes.co on GitHub](https://github.com/dtedesco1/dtedes.co)**
+
+It builds on the boilerplate with:
+- Custom components for interactive features
+- DaisyUI theme customization
+- Art Deco visual styling
+- Web projects API endpoint
+- Personal content organization
+
+## Why This Approach?
+
+**Separation of concerns**: Content lives in simple `.mdx` files that anyone can edit. Code lives in components. The routing system connects them automatically.
+
+**No mental overhead**: I don't think about build processes or CMS systems. I just write markdown files and they become pages.
+
+**Future-proof**: It's just files in folders. If I want to migrate to another system someday, my content is already in portable markdown format.
+
+**Flexible**: Need a static page? Write markdown. Need interactivity? Add a React component. The system adapts to the content, not the other way around.
+
+## Getting Started
+
+If you want to build something similar:
+
+1. Clone the [boilerplate](https://github.com/dtedesco1/nextjs-markdown-boilerplate)
+2. Install dependencies (`npm install`)
+3. Start writing `.mdx` files in `app/content/`
+4. Run `npm run dev` to see your site
+
+That's it. No complex setup, no configuration hell. Just write and deploy.
