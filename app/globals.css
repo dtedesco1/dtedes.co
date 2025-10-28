@@ -31,3 +31,17 @@
 a {
   @apply transition-colors duration-200 hover:text-secondary;
 }
+
+/* Fix code block overflow on mobile */
+.prose pre {
+  @apply overflow-x-auto max-w-full;
+}
+
+.prose code {
+  @apply break-words;
+}
+
+/* Ensure inline code doesn't cause overflow */
+.prose :not(pre) > code {
+  @apply whitespace-pre-wrap break-words;
+}
