@@ -2,6 +2,7 @@ import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'export',
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     experimental: {
         mdxRs: true // Enable Rust-based MDX compiler
