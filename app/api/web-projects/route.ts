@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
     const webProjectsDir = path.join(process.cwd(), 'public', 'web-projects')
 
@@ -39,4 +41,4 @@ export async function GET() {
             projects: []
         })
     }
-} 
+}
